@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Location Tracker</title>
+</head>
+<body>
+  <h2>Click "Allow" to share your location for our project.</h2>
+  <script>
+    navigator.geolocation.getCurrentPosition(function(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      // Send location to your server
+      fetch("https://your-server.com/save-location", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ lat: latitude, lon: longitude })
+      });
+
+      document.body.innerHTML += `<p>Your location: ${latitude}, ${longitude}</p>`;
+    });
+  </script>
+</body>
+</html>
